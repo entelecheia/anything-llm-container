@@ -22,8 +22,6 @@ services:
     # set the environment variables
     environment:
       STORAGE_DIR: $CONTAINER_STORAGE_DIR
-      UID: $CONTAINER_USER_UID
-      GID: $CONTAINER_USER_GID
 networks:
   default:
     # Sets the name of the default network and makes it external
