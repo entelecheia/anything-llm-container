@@ -8,7 +8,7 @@ services:
     container_name: $CONTAINER_NAME
     pull_policy: always
     restart: unless-stopped
-    user: root
+    user: "$CONTAINER_USER_UID:$CONTAINER_USER_GID"
     cap_add:
       - SYS_ADMIN
     # Sets the hostname of the container
@@ -22,6 +22,7 @@ services:
     # set the environment variables
     environment:
       STORAGE_DIR: $CONTAINER_STORAGE_DIR
+      DISABLE_TELEMETRY: true
 networks:
   default:
     # Sets the name of the default network and makes it external
