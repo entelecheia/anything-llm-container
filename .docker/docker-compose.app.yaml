@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  # Defines a service name
+  app:
+    # Sets the image name for the built image
+    image: $IMAGE_NAME:$IMAGE_TAG
+    container_name: $CONTAINER_NAME
+    pull_policy: always
+    restart: unless-stopped
+    user: root
+    cap_add:
+      - SYS_ADMIN
+    # Sets the hostname of the container
+    hostname: $CONTAINER_HOSTNAME
+    ports:
+      - "$HOST_WEB_SVC_PORT:$CONTAINER_WEB_SVC_PORT"
+    volumes:
+      # Maps directories from the host to the container
+      - "$HOST_STORAGE_DIR:$CONTAINER_STORAGE_DIR"
+      - "$HOST_ENV_FILE:$CONTAINER_ENV_FILE"
+    # set the environment variables
+    environment:
+      STORAGE_DIR: $CONTAINER_STORAGE_DIR
+      UID: $CONTAINER_USER_UID
+      GID: $CONTAINER_USER_GID
+networks:
+  default:
+    # Sets the name of the default network and makes it external
+    name: $CONTAINER_NETWORK_NAME
+    external: true
